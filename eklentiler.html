@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eklentiler — OrkhonJS</title>
+    <meta name="description" content="OrkhonJS editör eklentileri: VS Code, JetBrains, Vim/Neovim, DevTools, GitHub Actions, Prettier, Snippets ve Dağıtım Adaptörü.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- NAV -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo"><span class="logo-icon">𐰆</span> OrkhonJS</a>
+            <div class="nav-links">
+                <a href="dokumantasyon.html">Dokümantasyon</a>
+                <a href="ornekler.html">Örnekler</a>
+                <a href="eklentiler.html" style="color:var(--accent-2)">Eklentiler</a>
+                <a href="oyun-alani.html">Oyun Alanı</a>
+                <a href="https://github.com/emircesur/orkhonjs" target="_blank" class="nav-github">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+            </div>
+            <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menü">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- PLUGINS -->
+    <section class="plugins-page">
+        <div class="container">
+            <div class="section-header">
+                <h2>Editör <span class="gradient-text">Eklentileri</span></h2>
+                <p>OrkhonJS, tüm popüler editörler ve araçlar için kapsamlı eklenti desteği sunar</p>
+            </div>
+
+            <div class="plugins-grid">
+                <!-- 1: VS Code -->
+                <div class="plugin-card">
+                    <div class="plugin-card-icon">💜</div>
+                    <h3>VS Code Eklentisi</h3>
+                    <p>Sözdizimi renklendirme, IntelliSense otomatik tamamlama, LSP hata gösterimi, Debug Adapter ile hata ayıklama, 48+ kod parçacığı (snippet), görev sağlayıcı ve Web IDE desteği.</p>
+                    <pre style="margin-bottom:16px;"><code>cd extensions/orkhonjs-ide
+npm install
+npm run compile
+# F5 ile Extension Host'u başlatın</code></pre>
+                    <div class="tag-list">
+                        <span class="tag">TextMate</span>
+                        <span class="tag">LSP</span>
+                        <span class="tag">Debug Adapter</span>
+                        <span class="tag">Snippets</span>
+                    </div>
+                </div>
+
+                <!-- 2: JetBrains -->
+                <div class="plugin-card">
+                    <div class="plugin-card-icon">🧡</div>
+                    <h3>JetBrains Eklentisi</h3>
+                    <p>IntelliJ IDEA, WebStorm, PhpStorm ve diğer JetBrains IDE'leri için. Sözdizimi renklendirme, kod tamamlama, canlı şablonlar, parantez eşleştirme ve çalıştırma yapılandırması.</p>
+                    <pre style="margin-bottom:16px;"><code>cd extensions/jetbrains
+./gradlew buildPlugin
+# build/distributions/ → .zip dosyasını kurun
+# Settings → Plugins → Install from Disk</code></pre>
+                    <div class="tag-list">
+                        <span class="tag">IntelliJ</span>
+                        <span class="tag">WebStorm</span>
+                        <span class="tag">Live Templates</span>
+                    </div>
+                </div>
+
+                <!-- 3: Vim/Neovim -->
+                <div class="plugin-card">
+                    <div class="plugin-card-icon">💚</div>
+                    <h3>Vim/Neovim Eklentisi</h3>
+                    <p>Lua tabanlı, tam özellikli Neovim eklentisi. Sözdizimi renklendirme, akıllı girinti, LuaSnip snippet'leri, LSP entegrasyonu, Türkçe komutlar (<code>:OrkhonDerle</code>, <code>:OrkhonCalistir</code>).</p>
+                    <pre style="margin-bottom:16px;"><code>-- lazy.nvim ile:
+{
+    "orkhonjs/orkhonjs",
+    config = function()
+        require("orkhonjs").setup({
+            auto_compile = true,
+            snippets = true,
+            lsp = true,
+        })
+    end,
+    ft = "orkhon",
+}</code></pre>
+                    <div class="tag-list">
+                        <span class="tag">Neovim</span>
+                        <span class="tag">Lua</span>
+                        <span class="tag">LSP</span>
+                        <span class="tag">LuaSnip</span>
+                    </div>
+                </div>
+
+                <!-- 4: Browser DevTools -->
+                <div class="plugin-card">
+                    <div class="plugin-card-icon">🔍</div>
+                    <h3>Tarayıcı DevTools</h3>
+                    <p>Chrome/Edge tarayıcıları için OrkhonJS hata ayıklama paneli. Türkçe hata mesajları (50+ JS hatası çevirisi), JS→OrkhonJS kaynak çevirisi, AST görüntüleyici, performans izleme.</p>
+                    <pre style="margin-bottom:16px;"><code># Chrome:
+# 1. chrome://extensions/ adresini açın
+# 2. "Geliştirici modu" aktifleştirin
+# 3. "Paketlenmemiş yükle" tıklayın
+# 4. extensions/browser-devtools/ seçin</code></pre>
+                    <div class="tag-list">
+                        <span class="tag">Chrome</span>
+                        <span class="tag">Edge</span>
+                        <span class="tag">Source Maps</span>
+                    </div>
+                </div>
+
+                <!-- 5: GitHub Actions -->
+                <div class="plugin-card">
+                    <div class="plugin-card-icon">⚙️</div>
+                    <h3>GitHub Actions</h3>
+                    <p>CI/CD pipeline'ınızda OrkhonJS lint ve derleme. Pull request'lerde otomatik derleme, sıkı mod kontrolü, özelleştirilebilir hata raporlaması.</p>
+                    <pre style="margin-bottom:16px;"><code>name: OrkhonJS CI
+on: [push, pull_request]
+jobs:
+  kontrol:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: OrkhonJS Lint & Derleme
+        uses: ./extensions/github-actions
+        with:
+          source-dir: './src'
+          strict: 'true'</code></pre>
+                    <div class="tag-list">
+                        <span class="tag">CI/CD</span>
+                        <span class="tag">Lint</span>
+                        <span class="tag">Derleme</span>
+                    </div>
+                </div>
+
+                <!-- 6: Prettier -->
+                <div class="plugin-card">
+                    <div class="plugin-card-icon">🎨</div>
+                    <h3>Prettier Eklentisi</h3>
+                    <p>OrkhonJS dosyalarını otomatik biçimlendirme. Girinti boyutu, import sıralama, noktalı virgül tercihi, süslü parantez stili ayarları.</p>
+                    <pre style="margin-bottom:16px;"><code>npm install --save-dev prettier-plugin-orkhonjs
+
+// .prettierrc
+{
+  "plugins": ["prettier-plugin-orkhonjs"],
+  "orkhonIndentSize": 4,
+  "orkhonSortImports": true
+}</code></pre>
+                    <div class="tag-list">
+                        <span class="tag">Prettier</span>
+                        <span class="tag">Formatter</span>
+                        <span class="tag">Auto-format</span>
+                    </div>
+                </div>
+
+                <!-- 7: Snippets Pack -->
+                <div class="plugin-card">
+                    <div class="plugin-card-icon">📎</div>
+                    <h3>Snippet'ler Paketi</h3>
+                    <p>Tüm popüler editörler için OrkhonJS snippet koleksiyonu: VS Code, Vim UltiSnips, Emacs yasnippet, Sublime Text ve Atom. 20+ hazır şablon.</p>
+                    <pre style="margin-bottom:16px;"><code># Vim UltiSnips
+cp extensions/snippets-pack/vim-ultisnips/orkhon.snippets \
+   ~/.config/nvim/UltiSnips/
+
+# Emacs
+cp -r extensions/snippets-pack/emacs/* \
+   ~/.emacs.d/snippets/orkhon-mode/
+
+# Sublime Text
+# Packages/User/ dizinine kopyalayın</code></pre>
+                    <div class="tag-list">
+                        <span class="tag">Vim</span>
+                        <span class="tag">Emacs</span>
+                        <span class="tag">Sublime</span>
+                        <span class="tag">Atom</span>
+                    </div>
+                </div>
+
+                <!-- 8: Deploy Adapter -->
+                <div class="plugin-card">
+                    <div class="plugin-card-icon">🚀</div>
+                    <h3>Dağıtım Adaptörü</h3>
+                    <p>Vercel ve Netlify'a Türkçe CLI ile dağıtım. Yapılandırma oluşturma, derleme, dağıtma ve yerel önizleme komutları.</p>
+                    <pre style="margin-bottom:16px;"><code>npm install orkhonjs-deploy
+
+# Yapılandırma oluştur
+npx ork-dağıt yapılandır
+
+# Vercel'e dağıt
+npx ork-dağıt dağıt --hedef vercel --token TOKEN
+
+# Yerel önizleme
+npx ork-dağıt önizle</code></pre>
+                    <div class="tag-list">
+                        <span class="tag">Vercel</span>
+                        <span class="tag">Netlify</span>
+                        <span class="tag">CLI</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin-top:48px;">
+                <a href="https://github.com/emircesur/orkhonjs/tree/main/extensions" target="_blank" class="btn btn-primary">GitHub'da Kaynak Kodu →</a>
+                <a href="dokumantasyon.html" class="btn btn-secondary" style="margin-left:12px;">Dokümantasyon</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo"><span class="logo-icon">𐰆</span> OrkhonJS</div>
+                    <p>Türkçe sözdizimli programlama dili.<br>Göktürk yazıtlarından ilham alarak.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Dökümanlar</h4>
+                    <a href="dokumantasyon.html">Başlangıç</a>
+                    <a href="dokumantasyon.html#referans">Dil Referansı</a>
+                    <a href="ornekler.html">Örnekler</a>
+                    <a href="oyun-alani.html">Oyun Alanı</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Eklentiler</h4>
+                    <a href="eklentiler.html">VS Code</a>
+                    <a href="eklentiler.html">JetBrains</a>
+                    <a href="eklentiler.html">Vim/Neovim</a>
+                    <a href="eklentiler.html">DevTools</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Topluluk</h4>
+                    <a href="https://github.com/emircesur/orkhonjs" target="_blank">GitHub</a>
+                    <a href="https://github.com/emircesur/orkhonjs/issues" target="_blank">Sorunlar</a>
+                    <a href="https://github.com/emircesur/orkhonjs/pulls" target="_blank">Katkıda Bulun</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>MIT Lisansı ile açık kaynak. © 2026 OrkhonJS</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

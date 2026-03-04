@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oyun Alanı — OrkhonJS</title>
+    <meta name="description" content="OrkhonJS kodlarını tarayıcıda yazın ve çıktısını anında görün.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- NAV -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo"><span class="logo-icon">𐰆</span> OrkhonJS</a>
+            <div class="nav-links">
+                <a href="dokumantasyon.html">Dokümantasyon</a>
+                <a href="ornekler.html">Örnekler</a>
+                <a href="eklentiler.html">Eklentiler</a>
+                <a href="oyun-alani.html" style="color:var(--accent-2)">Oyun Alanı</a>
+                <a href="https://github.com/emircesur/orkhonjs" target="_blank" class="nav-github">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+            </div>
+            <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menü">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- PLAYGROUND -->
+    <div class="playground-page">
+        <div class="playground-header">
+            <h3><span class="logo-icon" style="font-size:1.1rem;">𐰆</span> OrkhonJS Oyun Alanı</h3>
+            <div class="playground-actions">
+                <select id="examples-select" onchange="loadExample(this.value)" style="background:var(--bg-3);border:1px solid var(--border);color:var(--text-dim);padding:6px 12px;border-radius:6px;font-family:var(--font);font-size:0.82rem;cursor:pointer;">
+                    <option value="">Örnek Seç...</option>
+                    <option value="merhaba">Merhaba Dünya</option>
+                    <option value="degiskenler">Değişkenler</option>
+                    <option value="islemler">İşlemler</option>
+                    <option value="siniflar">Sınıflar</option>
+                    <option value="diziler">Dizi İşlemleri</option>
+                    <option value="jsx">O-JSX</option>
+                </select>
+                <button class="btn-run" onclick="runCode()">▶ Çalıştır</button>
+                <button class="btn-clear" onclick="clearOutput()">Temizle</button>
+            </div>
+        </div>
+        <div class="playground-body">
+            <div class="playground-panel">
+                <div class="playground-panel-header">
+                    <span style="color:var(--accent-2);">●</span> OrkhonJS Girdisi &nbsp;—&nbsp; dosya.ork
+                </div>
+                <textarea class="playground-editor" id="editor" spellcheck="false">// Merhaba Dünya!
+Konsol.yaz("Merhaba, OrkhonJS!")
+
+// Değişken tanımlama
+tanım isim: Metin = "Dünya"
+sabit mesaj: Metin = `Merhaba, ${isim}!`
+Konsol.yaz(mesaj)
+
+// İşlem tanımlama
+işlem selamla(kime: Metin): Metin {
+    dön `Selam, ${kime}!`
+}
+
+Konsol.yaz(selamla("OrkhonJS"))
+</textarea>
+            </div>
+            <div class="playground-panel">
+                <div class="playground-panel-header">
+                    <span style="color:var(--green);">●</span> Çıktı
+                </div>
+                <pre class="playground-output" id="output">// Çalıştır düğmesine basın veya Ctrl+Enter kullanın
+</pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // ===== OrkhonJS -> JavaScript Transpiler (Client-side demo) =====
+    const KEYWORDS = {
+        'tanım': 'let', 'sabit': 'const', 'değişken': 'var',
+        'işlem': 'function', 'dön': 'return',
+        'eğer': 'if', 'değilse': 'else if', 'yoksa': 'else',
+        'döngü': 'for', 'iken': 'while',
+        'durum': 'switch', 'seçenek': 'case', 'kır': 'break', 'devam': 'continue',
+        'sınıf': 'class', 'uzatır': 'extends', 'uygular': 'implements',
+        'yapıcı': 'constructor', 'yeni': 'new', 'bu': 'this',
+        'arayüz': 'interface', 'tip': 'type',
+        'asenkron': 'async', 'bekle': 'await',
+        'içe_aktar': 'import', 'dışa_aktar': 'export', 'kimden': 'from',
+        'varsayılan': 'default',
+        'dene': 'try', 'yakala': 'catch', 'sonunda': 'finally', 'fırlat': 'throw',
+        'doğru': 'true', 'yanlış': 'false',
+        'belirsiz': 'null', 'tanımsız': 'undefined',
+        've': '&&', 'veya': '||', 'değil': '!',
+        'statik': 'static', 'olarak': 'as',
+        'nın': 'of',
+    };
+
+    const TYPES = {
+        'Metin': 'string', 'Sayı': 'number', 'DoğruYanlış': 'boolean',
+        'Boş': 'void', 'Hiç': 'any', 'Asla': 'never', 'Tanımsız': 'undefined',
+    };
+
+    const STDLIB = {
+        'Konsol.yaz': 'console.log', 'Konsol.hata': 'console.error',
+        'Konsol.uyarı': 'console.warn', 'Konsol.bilgi': 'console.info',
+        'Konsol.tablo': 'console.table',
+        'Matematik.taban': 'Math.floor', 'Matematik.tavan': 'Math.ceil',
+        'Matematik.yuvarla': 'Math.round', 'Matematik.rastgele': 'Math.random',
+        'Matematik.mutlak': 'Math.abs',
+        'JSON.ayrıştır': 'JSON.parse', 'JSON.metneÇevir': 'JSON.stringify',
+        'zamanlayıcıKur': 'setTimeout', 'aralıkKur': 'setInterval',
+    };
+
+    function transpile(src) {
+        let code = src;
+
+        // Remove type annotations (simplified: `: Type` patterns)
+        code = code.replace(/:\s*(Metin|Sayı|DoğruYanlış|Boş|Hiç|Asla|Tanımsız)(\[\])?\s*/g, (m, type, arr) => {
+            return ' ';
+        });
+        // Remove generic types like Söz<...>
+        code = code.replace(/:\s*Söz<[^>]+>/g, '');
+        // Remove interface/type blocks (they don't produce JS)
+        code = code.replace(/^(arayüz|tip)\s+\w+[^{]*\{[^}]*\}/gm, '');
+
+        // Replace stdlib first (longer matches)
+        for (const [ork, js] of Object.entries(STDLIB)) {
+            code = code.replaceAll(ork, js);
+        }
+
+        // Replace keywords using word boundaries
+        for (const [ork, js] of Object.entries(KEYWORDS)) {
+            const escaped = ork.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const regex = new RegExp('(?<![\\wçşğüöıÇŞĞÜÖİ])' + escaped + '(?![\\wçşğüöıÇŞĞÜÖİ])', 'g');
+            code = code.replace(regex, js);
+        }
+
+        // Replace types in remaining contexts
+        for (const [ork, js] of Object.entries(TYPES)) {
+            const escaped = ork.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const regex = new RegExp('(?<![\\wçşğüöıÇŞĞÜÖİ])' + escaped + '(?![\\wçşğüöıÇŞĞÜÖİ])', 'g');
+            code = code.replace(regex, js);
+        }
+
+        // Array methods
+        code = code.replaceAll('.haritala(', '.map(');
+        code = code.replaceAll('.süz(', '.filter(');
+        code = code.replaceAll('.indirge(', '.reduce(');
+        code = code.replaceAll('.uzunluk', '.length');
+        code = code.replaceAll('.herBiriİçin(', '.forEach(');
+        code = code.replaceAll('.bul(', '.find(');
+        code = code.replaceAll('.içerir(', '.includes(');
+
+        return code;
+    }
+
+    function runCode() {
+        const src = document.getElementById('editor').value;
+        const output = document.getElementById('output');
+        output.textContent = '';
+
+        try {
+            const js = transpile(src);
+
+            // Capture console output
+            const logs = [];
+            const origLog = console.log;
+            const origError = console.error;
+            const origWarn = console.warn;
+            const origInfo = console.info;
+            const origTable = console.table;
+
+            console.log = (...args) => logs.push(args.map(a => typeof a === 'object' ? JSON.stringify(a, null, 2) : String(a)).join(' '));
+            console.error = (...args) => logs.push('❌ ' + args.map(a => String(a)).join(' '));
+            console.warn = (...args) => logs.push('⚠️ ' + args.map(a => String(a)).join(' '));
+            console.info = (...args) => logs.push('ℹ️ ' + args.map(a => String(a)).join(' '));
+            console.table = (...args) => logs.push(args.map(a => JSON.stringify(a, null, 2)).join('\n'));
+
+            // Execute
+            const result = new Function(js)();
+
+            // Restore
+            console.log = origLog;
+            console.error = origError;
+            console.warn = origWarn;
+            console.info = origInfo;
+            console.table = origTable;
+
+            if (logs.length > 0) {
+                output.textContent = logs.join('\n');
+            } else if (result !== undefined) {
+                output.textContent = String(result);
+            } else {
+                output.textContent = '// Program çalıştırıldı (çıktı yok)';
+            }
+        } catch (e) {
+            output.textContent = '❌ Hata: ' + e.message;
+            output.style.color = '#f87171';
+            setTimeout(() => output.style.color = '', 3000);
+        }
+    }
+
+    function clearOutput() {
+        document.getElementById('output').textContent = '// Çıktı temizlendi\n';
+    }
+
+    // Example templates
+    const EXAMPLES = {
+        merhaba: `// Merhaba Dünya!
+Konsol.yaz("Merhaba, OrkhonJS!")
+
+tanım isim: Metin = "Dünya"
+sabit mesaj: Metin = \`Merhaba, \${isim}!\`
+Konsol.yaz(mesaj)
+
+işlem selamla(kime: Metin): Metin {
+    dön \`Selam, \${kime}!\`
+}
+
+Konsol.yaz(selamla("OrkhonJS"))`,
+
+        degiskenler: `// Değişken tanımlama
+tanım isim: Metin = "Ahmet"
+sabit yaş: Sayı = 25
+tanım aktif: DoğruYanlış = doğru
+tanım liste: Sayı[] = [1, 2, 3, 4, 5]
+
+Konsol.yaz("İsim:", isim)
+Konsol.yaz("Yaş:", yaş)
+Konsol.yaz("Aktif:", aktif)
+Konsol.yaz("Liste:", liste)
+
+// Değişken güncelleme
+isim = "Mehmet"
+Konsol.yaz("Yeni isim:", isim)`,
+
+        islemler: `// İşlem tanımlama
+işlem topla(a: Sayı, b: Sayı): Sayı {
+    dön a + b
+}
+
+// Ok işlemi
+sabit çarp = (a: Sayı, b: Sayı) => a * b
+
+// Karmaşık işlem
+işlem faktöriyel(n: Sayı): Sayı {
+    eğer (n <= 1) {
+        dön 1
+    }
+    dön n * faktöriyel(n - 1)
+}
+
+Konsol.yaz("5 + 3 =", topla(5, 3))
+Konsol.yaz("4 × 7 =", çarp(4, 7))
+Konsol.yaz("5! =", faktöriyel(5))
+Konsol.yaz("10! =", faktöriyel(10))`,
+
+        siniflar: `// Sınıf tanımlama
+sınıf Hayvan {
+    yapıcı(isim, yaş) {
+        bu.isim = isim
+        bu.yaş = yaş
+    }
+
+    işlem bilgiVer() {
+        dön \`\${bu.isim} (\${bu.yaş} yaşında)\`
+    }
+}
+
+sınıf Kedi uzatır Hayvan {
+    işlem sesCıkar() {
+        dön "Miyav!"
+    }
+}
+
+sınıf Köpek uzatır Hayvan {
+    işlem sesCıkar() {
+        dön "Hav hav!"
+    }
+}
+
+tanım kedi = yeni Kedi("Tekir", 3)
+tanım köpek = yeni Köpek("Karabaş", 5)
+
+Konsol.yaz(kedi.bilgiVer(), "→", kedi.sesCıkar())
+Konsol.yaz(köpek.bilgiVer(), "→", köpek.sesCıkar())`,
+
+        diziler: `// Dizi işlemleri
+sabit sayılar = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+// Haritala (map)
+sabit kareler = sayılar.haritala((s) => s * s)
+Konsol.yaz("Kareler:", kareler)
+
+// Süz (filter)
+sabit çiftler = sayılar.süz((s) => s % 2 === 0)
+Konsol.yaz("Çiftler:", çiftler)
+
+// İndirge (reduce)
+sabit toplam = sayılar.indirge((t, s) => t + s, 0)
+Konsol.yaz("Toplam:", toplam)
+
+// Zincirleme
+sabit sonuç = sayılar
+    .süz((s) => s % 2 === 0)
+    .haritala((s) => s * s)
+    .indirge((t, s) => t + s, 0)
+Konsol.yaz("Çiftlerin karelerinin toplamı:", sonuç)`,
+
+        jsx: `// O-JSX (React Bileşeni) - Sadece gösterim
+// Not: JSX tarayıcıda çalıştırılamaz
+
+Konsol.yaz("=== O-JSX Bileşen Örneği ===")
+Konsol.yaz("")
+Konsol.yaz("içe_aktar { useState } kimden 'react'")
+Konsol.yaz("")
+Konsol.yaz("dışa_aktar işlem Sayaç(): JSX.Eleman {")
+Konsol.yaz("    tanım [değer, değerAyarla] = useState(0)")
+Konsol.yaz("    dön (")
+Konsol.yaz("        <div className='sayaç'>")
+Konsol.yaz("            <h1>Değer: {değer}</h1>")
+Konsol.yaz("            <buton tıklama={() => değerAyarla(değer + 1)}>")
+Konsol.yaz("                Artır")
+Konsol.yaz("            </buton>")
+Konsol.yaz("        </div>")
+Konsol.yaz("    )")
+Konsol.yaz("}")
+Konsol.yaz("")
+Konsol.yaz("// Bu kod TypeScript/TSX'e derlenir ve React ile çalışır")`
+    };
+
+    function loadExample(name) {
+        if (name && EXAMPLES[name]) {
+            document.getElementById('editor').value = EXAMPLES[name];
+        }
+    }
+
+    // Ctrl+Enter shortcut
+    document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            e.preventDefault();
+            runCode();
+        }
+    });
+
+    // Tab key in editor
+    document.getElementById('editor').addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') {
+            e.preventDefault();
+            const ta = e.target;
+            const start = ta.selectionStart;
+            const end = ta.selectionEnd;
+            ta.value = ta.value.substring(0, start) + '    ' + ta.value.substring(end);
+            ta.selectionStart = ta.selectionEnd = start + 4;
+        }
+    });
+    </script>
+</body>
+</html>

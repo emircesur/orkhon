@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokümantasyon — OrkhonJS</title>
+    <meta name="description" content="OrkhonJS dil referansı, anahtar kelimeler, tip sistemi, standart kütüphane ve CLI komutları.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- NAV -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo"><span class="logo-icon">𐰆</span> OrkhonJS</a>
+            <div class="nav-links">
+                <a href="dokumantasyon.html" style="color:var(--accent-2)">Dokümantasyon</a>
+                <a href="ornekler.html">Örnekler</a>
+                <a href="eklentiler.html">Eklentiler</a>
+                <a href="oyun-alani.html">Oyun Alanı</a>
+                <a href="https://github.com/emircesur/orkhonjs" target="_blank" class="nav-github">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+            </div>
+            <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menü">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- DOCS LAYOUT -->
+    <div class="container docs-layout">
+        <aside class="docs-sidebar">
+            <h3>Başlangıç</h3>
+            <a href="#kurulum" class="active">Kurulum</a>
+            <a href="#ilk-program">İlk Program</a>
+            <a href="#derleme">Derleme & Çalıştırma</a>
+
+            <h3 id="referans">Dil Referansı</h3>
+            <a href="#anahtar-kelimeler">Anahtar Kelimeler</a>
+            <a href="#tip-sistemi">Tip Sistemi</a>
+            <a href="#degiskenler">Değişkenler</a>
+            <a href="#islemler">İşlemler</a>
+            <a href="#siniflar">Sınıflar</a>
+            <a href="#arayuzler">Arayüzler & Jenerikler</a>
+            <a href="#ojsx">O-JSX (React)</a>
+            <a href="#hata-yonetimi">Hata Yönetimi</a>
+            <a href="#donguler">Döngüler & Diziler</a>
+
+            <h3>Standart Kütüphane</h3>
+            <a href="#stdlib">Standart Kütüphane</a>
+
+            <h3>CLI</h3>
+            <a href="#cli">CLI Komutları</a>
+        </aside>
+
+        <main class="docs-content">
+            <h1>OrkhonJS <span class="gradient-text">Dokümantasyon</span></h1>
+            <p>OrkhonJS, tamamen Türkçe sözdizimi ile kod yazmanızı sağlayan, statik tipli bir programlama dilidir. <code>.ork</code> dosyaları TypeScript/TSX'e derlenir ve JavaScript ekosistemine tam uyumlu çalışır.</p>
+
+            <!-- KURULUM -->
+            <h2 id="kurulum">Kurulum</h2>
+            <p>OrkhonJS'yi npm ile global olarak veya proje bazlı kurabilirsiniz:</p>
+            <pre><code># npm ile global kurulum
+npm install -g orkhonjs
+
+# Veya yerel olarak projenize ekleyin
+npm install orkhonjs --save-dev</code></pre>
+            <p><strong>Ön Koşullar:</strong></p>
+            <ul>
+                <li>Node.js 18 veya üzeri</li>
+                <li>npm veya yarn</li>
+                <li>TypeScript 5+ (isteğe bağlı)</li>
+            </ul>
+
+            <!-- İLK PROGRAM -->
+            <h2 id="ilk-program">İlk Programınız</h2>
+            <p><code>merhaba.ork</code> dosyası oluşturun:</p>
+            <pre><code><span class="comment">// Merhaba Dünya!</span>
+Konsol.yaz(<span class="str">"Merhaba, OrkhonJS!"</span>)
+
+<span class="comment">// Değişken tanımlama</span>
+<span class="kw">tanım</span> isim: Metin = <span class="str">"Dünya"</span>
+<span class="kw">sabit</span> mesaj: Metin = `Merhaba, ${isim}!`
+
+<span class="comment">// İşlem tanımlama</span>
+<span class="kw">işlem</span> <span class="fn">selamla</span>(kime: Metin): Metin {
+    <span class="kw">dön</span> `Selam, ${kime}!`
+}
+
+Konsol.yaz(selamla(<span class="str">"OrkhonJS"</span>))</code></pre>
+
+            <!-- DERLEME -->
+            <h2 id="derleme">Derleme & Çalıştırma</h2>
+            <pre><code># Derle
+orkhon derle merhaba.ork
+
+# Çalıştır
+orkhon çalıştır merhaba.ork
+
+# İzleme modu (hot-reload)
+orkhon izle ./src</code></pre>
+
+            <!-- ANAHTAR KELİMELER -->
+            <h2 id="anahtar-kelimeler">Anahtar Kelimeler</h2>
+            <p>OrkhonJS'nin tüm anahtar kelimeleri ve JavaScript/TypeScript karşılıkları:</p>
+            <table>
+                <thead>
+                    <tr><th>OrkhonJS</th><th>JavaScript/TS</th><th>Açıklama</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>tanım</code></td><td><code>let</code></td><td>Değişken tanımlama</td></tr>
+                    <tr><td><code>sabit</code></td><td><code>const</code></td><td>Sabit tanımlama</td></tr>
+                    <tr><td><code>değişken</code></td><td><code>var</code></td><td>Değişken tanımlama</td></tr>
+                    <tr><td><code>işlem</code></td><td><code>function</code></td><td>İşlem (fonksiyon)</td></tr>
+                    <tr><td><code>dön</code></td><td><code>return</code></td><td>Değer döndürme</td></tr>
+                    <tr><td><code>eğer</code></td><td><code>if</code></td><td>Koşul</td></tr>
+                    <tr><td><code>değilse</code></td><td><code>else if</code></td><td>Alternatif koşul</td></tr>
+                    <tr><td><code>yoksa</code></td><td><code>else</code></td><td>Varsayılan dal</td></tr>
+                    <tr><td><code>döngü</code></td><td><code>for</code></td><td>Döngü</td></tr>
+                    <tr><td><code>iken</code></td><td><code>while</code></td><td>Koşullu döngü</td></tr>
+                    <tr><td><code>durum</code></td><td><code>switch</code></td><td>Çoklu seçim</td></tr>
+                    <tr><td><code>seçenek</code></td><td><code>case</code></td><td>Seçenek dalı</td></tr>
+                    <tr><td><code>kır</code></td><td><code>break</code></td><td>Döngüden çık</td></tr>
+                    <tr><td><code>devam</code></td><td><code>continue</code></td><td>Sonraki iterasyon</td></tr>
+                    <tr><td><code>sınıf</code></td><td><code>class</code></td><td>Sınıf tanımlama</td></tr>
+                    <tr><td><code>uzatır</code></td><td><code>extends</code></td><td>Kalıtım</td></tr>
+                    <tr><td><code>uygular</code></td><td><code>implements</code></td><td>Arayüz uygulama</td></tr>
+                    <tr><td><code>yapıcı</code></td><td><code>constructor</code></td><td>Yapıcı metod</td></tr>
+                    <tr><td><code>yeni</code></td><td><code>new</code></td><td>Nesne oluşturma</td></tr>
+                    <tr><td><code>bu</code></td><td><code>this</code></td><td>Mevcut nesne</td></tr>
+                    <tr><td><code>arayüz</code></td><td><code>interface</code></td><td>Arayüz tanımlama</td></tr>
+                    <tr><td><code>tip</code></td><td><code>type</code></td><td>Tip takma adı</td></tr>
+                    <tr><td><code>asenkron</code></td><td><code>async</code></td><td>Asenkron işlem</td></tr>
+                    <tr><td><code>bekle</code></td><td><code>await</code></td><td>Söz bekle</td></tr>
+                    <tr><td><code>içe_aktar</code></td><td><code>import</code></td><td>Modül içe aktarma</td></tr>
+                    <tr><td><code>dışa_aktar</code></td><td><code>export</code></td><td>Modül dışa aktarma</td></tr>
+                    <tr><td><code>kimden</code></td><td><code>from</code></td><td>İçe aktarma kaynağı</td></tr>
+                    <tr><td><code>varsayılan</code></td><td><code>default</code></td><td>Varsayılan dışa aktarma</td></tr>
+                    <tr><td><code>dene</code></td><td><code>try</code></td><td>Hata yakalama bloğu</td></tr>
+                    <tr><td><code>yakala</code></td><td><code>catch</code></td><td>Hata yakalama</td></tr>
+                    <tr><td><code>sonunda</code></td><td><code>finally</code></td><td>Son blok</td></tr>
+                    <tr><td><code>fırlat</code></td><td><code>throw</code></td><td>Hata fırlatma</td></tr>
+                    <tr><td><code>doğru</code></td><td><code>true</code></td><td>Doğru değeri</td></tr>
+                    <tr><td><code>yanlış</code></td><td><code>false</code></td><td>Yanlış değeri</td></tr>
+                    <tr><td><code>belirsiz</code></td><td><code>null</code></td><td>Boş değer</td></tr>
+                    <tr><td><code>tanımsız</code></td><td><code>undefined</code></td><td>Tanımsız değer</td></tr>
+                    <tr><td><code>ve</code></td><td><code>&amp;&amp;</code></td><td>Mantıksal VE</td></tr>
+                    <tr><td><code>veya</code></td><td><code>||</code></td><td>Mantıksal VEYA</td></tr>
+                    <tr><td><code>değil</code></td><td><code>!</code></td><td>Mantıksal DEĞİL</td></tr>
+                    <tr><td><code>statik</code></td><td><code>static</code></td><td>Statik üye</td></tr>
+                    <tr><td><code>olarak</code></td><td><code>as</code></td><td>Tip dönüşümü</td></tr>
+                </tbody>
+            </table>
+
+            <!-- TİP SİSTEMİ -->
+            <h2 id="tip-sistemi">Tip Sistemi</h2>
+            <p>OrkhonJS, TypeScript benzeri bir tip sistemi sunar. Tüm tip isimleri Türkçe'dir:</p>
+            <table>
+                <thead>
+                    <tr><th>OrkhonJS</th><th>TypeScript</th><th>Açıklama</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>Metin</code></td><td><code>string</code></td><td>Metin dizisi</td></tr>
+                    <tr><td><code>Sayı</code></td><td><code>number</code></td><td>Sayı</td></tr>
+                    <tr><td><code>DoğruYanlış</code></td><td><code>boolean</code></td><td>Mantıksal tip</td></tr>
+                    <tr><td><code>Boş</code></td><td><code>void</code></td><td>Boş dönüş</td></tr>
+                    <tr><td><code>Hiç</code></td><td><code>any</code></td><td>Herhangi bir tip</td></tr>
+                    <tr><td><code>Asla</code></td><td><code>never</code></td><td>Asla tipi</td></tr>
+                    <tr><td><code>Tanımsız</code></td><td><code>undefined</code></td><td>Tanımsız tip</td></tr>
+                </tbody>
+            </table>
+
+            <!-- DEĞİŞKENLER -->
+            <h2 id="degiskenler">Değişkenler & Tipler</h2>
+            <pre><code><span class="kw">tanım</span> isim: Metin = <span class="str">"Ahmet"</span>
+<span class="kw">sabit</span> yaş: Sayı = <span class="num">25</span>
+<span class="kw">tanım</span> aktif: DoğruYanlış = <span class="kw">doğru</span>
+<span class="kw">tanım</span> liste: Sayı[] = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>]</code></pre>
+            <p><code>tanım</code> değiştirilebilir değişken, <code>sabit</code> değiştirilemez sabit tanımlar. Tip çıkarımı desteklenir — tipi belirtmezseniz derleyici otomatik çıkarır.</p>
+
+            <!-- İŞLEMLER -->
+            <h2 id="islemler">İşlemler (Fonksiyonlar)</h2>
+            <pre><code><span class="kw">işlem</span> <span class="fn">topla</span>(a: Sayı, b: Sayı): Sayı {
+    <span class="kw">dön</span> a + b
+}
+
+<span class="comment">// Ok işlemi</span>
+<span class="kw">sabit</span> çarp = (a: Sayı, b: Sayı): Sayı =&gt; a * b
+
+<span class="comment">// Asenkron işlem</span>
+<span class="kw">asenkron</span> <span class="kw">işlem</span> <span class="fn">veriGetir</span>(url: Metin): Söz&lt;Hiç&gt; {
+    <span class="kw">tanım</span> yanıt = <span class="kw">bekle</span> ağ.getir(url)
+    <span class="kw">dön</span> <span class="kw">bekle</span> yanıt.json()
+}</code></pre>
+            <p><code>işlem</code> anahtar kelimesi ile fonksiyon tanımlayabilirsiniz. Ok işlemleri (arrow functions) de desteklenir. Asenkron fonksiyonlar için <code>asenkron</code> ve <code>bekle</code> kullanın.</p>
+
+            <!-- SINIFLAR -->
+            <h2 id="siniflar">Sınıflar</h2>
+            <pre><code><span class="kw">sınıf</span> <span class="fn">Hayvan</span> {
+    isim: Metin
+    yaş: Sayı
+
+    <span class="kw">yapıcı</span>(isim: Metin, yaş: Sayı) {
+        <span class="kw">bu</span>.isim = isim
+        <span class="kw">bu</span>.yaş = yaş
+    }
+
+    <span class="kw">işlem</span> <span class="fn">sesCıkar</span>(): Metin {
+        <span class="kw">dön</span> <span class="str">"..."</span>
+    }
+}
+
+<span class="kw">sınıf</span> <span class="fn">Kedi</span> <span class="kw">uzatır</span> Hayvan {
+    <span class="kw">yapıcı</span>(isim: Metin, yaş: Sayı) {
+        üst(isim, yaş)
+    }
+
+    <span class="kw">işlem</span> <span class="fn">sesCıkar</span>(): Metin {
+        <span class="kw">dön</span> <span class="str">"Miyav!"</span>
+    }
+}
+
+<span class="kw">tanım</span> kedi = <span class="kw">yeni</span> Kedi(<span class="str">"Tekir"</span>, <span class="num">3</span>)
+Konsol.yaz(kedi.sesCıkar())  <span class="comment">// "Miyav!"</span></code></pre>
+
+            <!-- ARAYÜZLER -->
+            <h2 id="arayuzler">Arayüzler & Jenerikler</h2>
+            <pre><code><span class="kw">arayüz</span> <span class="fn">Kullanıcı</span> {
+    id: Sayı
+    isim: Metin
+    eposta: Metin
+    aktif: DoğruYanlış
+}
+
+<span class="kw">arayüz</span> <span class="fn">Depo</span>&lt;T&gt; {
+    getir(id: Sayı): Söz&lt;T&gt;
+    kaydet(veri: T): Söz&lt;Boş&gt;
+    sil(id: Sayı): Söz&lt;DoğruYanlış&gt;
+}</code></pre>
+            <p><code>arayüz</code> ile arayüz tanımı, <code>tip</code> ile tip takma adları oluşturulur. Jenerik tipler <code>&lt;T&gt;</code> sözdizimiyle desteklenir.</p>
+
+            <!-- O-JSX -->
+            <h2 id="ojsx">O-JSX (React Bileşenleri)</h2>
+            <p>OrkhonJS, React bileşenlerini tamamen Türkçe yazmanızı sağlar:</p>
+            <pre><code><span class="kw">içe_aktar</span> { useState } <span class="kw">kimden</span> <span class="str">"react"</span>
+
+<span class="kw">arayüz</span> <span class="fn">SayaçÖzellikleri</span> {
+    başlangıç: Sayı
+}
+
+<span class="kw">dışa_aktar</span> <span class="kw">işlem</span> <span class="fn">Sayaç</span>(özellikler: SayaçÖzellikleri): JSX.Eleman {
+    <span class="kw">tanım</span> [değer, değerAyarla] = useState(özellikler.başlangıç)
+
+    <span class="kw">dön</span> (
+        &lt;<span class="tag">div</span> className=<span class="str">"sayaç"</span>&gt;
+            &lt;<span class="tag">h1</span>&gt;Değer: {değer}&lt;/<span class="tag">h1</span>&gt;
+            &lt;<span class="tag">buton</span> tıklama={() =&gt; değerAyarla(değer + <span class="num">1</span>)}&gt;
+                Artır
+            &lt;/<span class="tag">buton</span>&gt;
+            &lt;<span class="tag">buton</span> tıklama={() =&gt; değerAyarla(değer - <span class="num">1</span>)}&gt;
+                Azalt
+            &lt;/<span class="tag">buton</span>&gt;
+        &lt;/<span class="tag">div</span>&gt;
+    )
+}</code></pre>
+
+            <!-- HATA YÖNETİMİ -->
+            <h2 id="hata-yonetimi">Hata Yönetimi</h2>
+            <pre><code><span class="kw">dene</span> {
+    <span class="kw">tanım</span> veri = <span class="kw">bekle</span> veriGetir(<span class="str">"https://api.örnek.com/kullanıcılar"</span>)
+    Konsol.yaz(veri)
+} <span class="kw">yakala</span> (hata) {
+    Konsol.hata(<span class="str">"Veri alınamadı:"</span>, hata)
+} <span class="kw">sonunda</span> {
+    Konsol.bilgi(<span class="str">"İstek tamamlandı"</span>)
+}</code></pre>
+            <p><code>dene</code>/<code>yakala</code>/<code>sonunda</code> blokları ile hata yönetimi yapılır. <code>fırlat</code> ile hata fırlatılır.</p>
+
+            <!-- DÖNGÜLER -->
+            <h2 id="donguler">Döngüler & Dizi İşlemleri</h2>
+            <pre><code><span class="kw">sabit</span> sayılar: Sayı[] = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>, <span class="num">6</span>, <span class="num">7</span>, <span class="num">8</span>, <span class="num">9</span>, <span class="num">10</span>]
+
+<span class="comment">// Haritala (map)</span>
+<span class="kw">sabit</span> kareler = sayılar.haritala((s) =&gt; s * s)
+
+<span class="comment">// Süz (filter)</span>
+<span class="kw">sabit</span> çiftler = sayılar.süz((s) =&gt; s % <span class="num">2</span> == <span class="num">0</span>)
+
+<span class="comment">// İndirge (reduce)</span>
+<span class="kw">sabit</span> toplam = sayılar.indirge((t, s) =&gt; t + s, <span class="num">0</span>)
+
+<span class="comment">// Klasik döngü</span>
+<span class="kw">döngü</span> (<span class="kw">tanım</span> i = <span class="num">0</span>; i &lt; sayılar.uzunluk; i++) {
+    Konsol.yaz(sayılar[i])
+}
+
+<span class="comment">// For...of</span>
+<span class="kw">döngü</span> (<span class="kw">tanım</span> sayı <span class="kw">nın</span> sayılar) {
+    Konsol.yaz(sayı)
+}</code></pre>
+
+            <!-- STANDART KÜTÜPHANE -->
+            <h2 id="stdlib">Standart Kütüphane</h2>
+            <p>OrkhonJS, JavaScript standart kütüphanesinin Türkçe karşılıklarını içerir:</p>
+            <table>
+                <thead>
+                    <tr><th>OrkhonJS</th><th>JavaScript</th><th>Açıklama</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>Konsol.yaz()</code></td><td><code>console.log()</code></td><td>Konsola yazdır</td></tr>
+                    <tr><td><code>Konsol.hata()</code></td><td><code>console.error()</code></td><td>Hata yazdır</td></tr>
+                    <tr><td><code>Konsol.uyarı()</code></td><td><code>console.warn()</code></td><td>Uyarı yazdır</td></tr>
+                    <tr><td><code>Konsol.bilgi()</code></td><td><code>console.info()</code></td><td>Bilgi yazdır</td></tr>
+                    <tr><td><code>Konsol.tablo()</code></td><td><code>console.table()</code></td><td>Tablo yazdır</td></tr>
+                    <tr><td><code>Matematik.taban()</code></td><td><code>Math.floor()</code></td><td>Aşağı yuvarla</td></tr>
+                    <tr><td><code>Matematik.tavan()</code></td><td><code>Math.ceil()</code></td><td>Yukarı yuvarla</td></tr>
+                    <tr><td><code>Matematik.yuvarla()</code></td><td><code>Math.round()</code></td><td>Yuvarla</td></tr>
+                    <tr><td><code>Matematik.rastgele()</code></td><td><code>Math.random()</code></td><td>Rastgele sayı</td></tr>
+                    <tr><td><code>Matematik.mutlak()</code></td><td><code>Math.abs()</code></td><td>Mutlak değer</td></tr>
+                    <tr><td><code>JSON.ayrıştır()</code></td><td><code>JSON.parse()</code></td><td>JSON çözümle</td></tr>
+                    <tr><td><code>JSON.metneÇevir()</code></td><td><code>JSON.stringify()</code></td><td>JSON'a çevir</td></tr>
+                    <tr><td><code>Söz.hepsi()</code></td><td><code>Promise.all()</code></td><td>Tüm sözleri bekle</td></tr>
+                    <tr><td><code>Söz.yarış()</code></td><td><code>Promise.race()</code></td><td>İlk biten sözü al</td></tr>
+                    <tr><td><code>zamanlayıcıKur()</code></td><td><code>setTimeout()</code></td><td>Zamanlayıcı</td></tr>
+                    <tr><td><code>aralıkKur()</code></td><td><code>setInterval()</code></td><td>Aralıklı çalıştır</td></tr>
+                </tbody>
+            </table>
+
+            <!-- CLI -->
+            <h2 id="cli">CLI Komutları</h2>
+            <pre><code># Proje başlat
+orkhon başlat
+
+# Tek dosya derle
+orkhon derle dosya.ork
+
+# Çalıştır
+orkhon çalıştır dosya.ork
+
+# Dizin izle (hot-reload)
+orkhon izle ./src
+
+# Yardım
+orkhon --yardım</code></pre>
+
+            <h3>Derleyici Mimarisi</h3>
+            <p>OrkhonJS derleyicisi 4 aşamalı bir pipeline kullanır:</p>
+            <ol>
+                <li><strong>Lexer:</strong> Kaynak kodunu token dizisine çevirir</li>
+                <li><strong>Parser:</strong> Token dizisinden AST (Soyut Sözdizimi Ağacı) üretir</li>
+                <li><strong>Analyzer:</strong> Tip kontrolü ve anlamsal doğrulama yapar</li>
+                <li><strong>Generator:</strong> AST'den TypeScript/JavaScript çıktısı üretir</li>
+            </ol>
+            <p>Ek olarak <strong>LLVM backend</strong>, <strong>OVM (OrkhonJS Sanal Makinesi)</strong> ve <strong>çoklu hedef derleyicisi</strong> ile WASM, Kotlin, Swift, C++, Rust çıktıları da desteklenir.</p>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo"><span class="logo-icon">𐰆</span> OrkhonJS</div>
+                    <p>Türkçe sözdizimli programlama dili.<br>Göktürk yazıtlarından ilham alarak.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Dökümanlar</h4>
+                    <a href="dokumantasyon.html">Başlangıç</a>
+                    <a href="dokumantasyon.html#referans">Dil Referansı</a>
+                    <a href="ornekler.html">Örnekler</a>
+                    <a href="oyun-alani.html">Oyun Alanı</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Eklentiler</h4>
+                    <a href="eklentiler.html">VS Code</a>
+                    <a href="eklentiler.html">JetBrains</a>
+                    <a href="eklentiler.html">Vim/Neovim</a>
+                    <a href="eklentiler.html">DevTools</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Topluluk</h4>
+                    <a href="https://github.com/emircesur/orkhonjs" target="_blank">GitHub</a>
+                    <a href="https://github.com/emircesur/orkhonjs/issues" target="_blank">Sorunlar</a>
+                    <a href="https://github.com/emircesur/orkhonjs/pulls" target="_blank">Katkıda Bulun</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>MIT Lisansı ile açık kaynak. © 2026 OrkhonJS</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

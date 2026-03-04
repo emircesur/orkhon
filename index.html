@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrkhonJS — Türkçe Sözdizimli Programlama Dili</title>
+    <meta name="description" content="OrkhonJS: Tamamen Türkçe sözdizimi ile kod yazmanızı sağlayan, statik tipli bir programlama dili. TypeScript/TSX'e derlenir.">
+    <meta name="keywords" content="OrkhonJS, Türkçe programlama, Turkish programming language, TypeScript, transpiler">
+    <meta property="og:title" content="OrkhonJS — Türkçe Sözdizimli Programlama Dili">
+    <meta property="og:description" content="Tamamen Türkçe sözdizimi ile modern web uygulamaları geliştirin.">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- NAV -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-icon">𐰆</span> OrkhonJS
+            </a>
+            <div class="nav-links">
+                <a href="dokumantasyon.html">Dokümantasyon</a>
+                <a href="ornekler.html">Örnekler</a>
+                <a href="eklentiler.html">Eklentiler</a>
+                <a href="oyun-alani.html">Oyun Alanı</a>
+                <a href="https://github.com/emircesur/orkhonjs" target="_blank" class="nav-github">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+            </div>
+            <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menü">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg">
+            <div class="hero-grid"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">v1.0.0 — Açık Kaynak</div>
+            <h1>Kodu <span class="gradient-text">Türkçe</span> yaz.</h1>
+            <p class="hero-desc">
+                OrkhonJS, tamamen Türkçe sözdizimi ile modern web uygulamaları geliştirmenizi sağlayan, 
+                statik tipli bir programlama dilidir. <code>.ork</code> dosyaları TypeScript/TSX'e derlenir.
+            </p>
+            <div class="hero-actions">
+                <a href="dokumantasyon.html" class="btn btn-primary">Başla →</a>
+                <a href="oyun-alani.html" class="btn btn-secondary">Oyun Alanı</a>
+            </div>
+            <div class="hero-install">
+                <code>npm install -g orkhonjs</code>
+                <button onclick="navigator.clipboard.writeText('npm install -g orkhonjs');this.textContent='✓ Kopyalandı';setTimeout(()=>this.textContent='Kopyala',2000)" class="copy-btn">Kopyala</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CODE SHOWCASE -->
+    <section class="showcase">
+        <div class="container">
+            <div class="showcase-grid">
+                <div class="showcase-editor">
+                    <div class="editor-header">
+                        <div class="editor-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="editor-title">merhaba.ork</span>
+                    </div>
+                    <pre class="editor-code"><code><span class="kw">içe_aktar</span> { useState } <span class="kw">kimden</span> <span class="str">"react"</span>
+
+<span class="comment">// Sayaç bileşeni</span>
+<span class="kw">dışa_aktar</span> <span class="kw">işlem</span> <span class="fn">Sayaç</span>(): JSX.Eleman {
+    <span class="kw">tanım</span> [değer, değerAyarla] = useState(<span class="num">0</span>)
+
+    <span class="kw">dön</span> (
+        &lt;<span class="tag">div</span> className=<span class="str">"sayaç"</span>&gt;
+            &lt;<span class="tag">h1</span>&gt;Değer: {değer}&lt;/<span class="tag">h1</span>&gt;
+            &lt;<span class="tag">buton</span> tıklama={() =&gt; değerAyarla(değer + <span class="num">1</span>)}&gt;
+                Artır ↑
+            &lt;/<span class="tag">buton</span>&gt;
+        &lt;/<span class="tag">div</span>&gt;
+    )
+}</code></pre>
+                </div>
+                <div class="showcase-info">
+                    <h2>JavaScript'in gücü,<br><span class="gradient-text">Türkçe'nin güzelliği.</span></h2>
+                    <p>OrkhonJS ile React bileşenleri, API'ler, sunucu uygulamaları — her şeyi Türkçe yazın. Derleyici anında TypeScript'e çevirir.</p>
+                    <ul class="feature-list">
+                        <li>
+                            <span class="feature-icon">⚡</span>
+                            <div><strong>Anlık Derleme</strong><br>Hot-reload ile anında sonuç görün</div>
+                        </li>
+                        <li>
+                            <span class="feature-icon">🛡️</span>
+                            <div><strong>Statik Tipleme</strong><br>TypeScript seviyesinde tip güvenliği</div>
+                        </li>
+                        <li>
+                            <span class="feature-icon">⚛️</span>
+                            <div><strong>O-JSX Desteği</strong><br>React/JSX bileşenleri Türkçe yazın</div>
+                        </li>
+                        <li>
+                            <span class="feature-icon">📦</span>
+                            <div><strong>npm Uyumu</strong><br>Tüm npm paketleri ile sorunsuz çalışır</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Neden <span class="gradient-text">OrkhonJS</span>?</h2>
+                <p>Modern geliştirme için ihtiyacınız olan her şey, Türkçe.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-card-icon">🇹🇷</div>
+                    <h3>Tamamen Türkçe</h3>
+                    <p>Anahtar kelimeler, tip isimleri, standart kütüphane — her şey Türkçe. <code>tanım</code>, <code>işlem</code>, <code>sınıf</code> gibi doğal anahtar kelimeler.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon">📝</div>
+                    <h3>Statik Tip Sistemi</h3>
+                    <p><code>Metin</code>, <code>Sayı</code>, <code>DoğruYanlış</code> ile güçlü tipleme. Jenerik tipler, arayüzler ve tip çıkarımı.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon">⚛️</div>
+                    <h3>O-JSX (React)</h3>
+                    <p>React bileşenlerini tamamen Türkçe yazın. JSX sözdizimi ile modern UI geliştirme.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon">🎯</div>
+                    <h3>Çoklu Hedef</h3>
+                    <p>JavaScript, TypeScript, WASM, LLVM-IR, Kotlin, Swift, C++, Rust — tek kaynak, çok hedef.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon">🔧</div>
+                    <h3>Zengin Araç Seti</h3>
+                    <p>VS Code, JetBrains, Vim/Neovim eklentileri. Prettier, GitHub Actions, DevTools desteği.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon">🚀</div>
+                    <h3>Kolay Dağıtım</h3>
+                    <p>Vercel ve Netlify'a Türkçe CLI ile dağıtın. <code>ork-dağıt dağıt --hedef vercel</code></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KEYWORDS TABLE -->
+    <section class="keywords-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Anahtar Kelime <span class="gradient-text">Haritası</span></h2>
+                <p>OrkhonJS anahtar kelimeleri ve JavaScript karşılıkları</p>
+            </div>
+            <div class="keywords-grid">
+                <div class="keyword-group">
+                    <h4>Değişkenler</h4>
+                    <div class="keyword-row"><code class="kw-ork">tanım</code><span class="arrow">→</span><code class="kw-js">let</code></div>
+                    <div class="keyword-row"><code class="kw-ork">sabit</code><span class="arrow">→</span><code class="kw-js">const</code></div>
+                    <div class="keyword-row"><code class="kw-ork">değişken</code><span class="arrow">→</span><code class="kw-js">var</code></div>
+                </div>
+                <div class="keyword-group">
+                    <h4>İşlemler</h4>
+                    <div class="keyword-row"><code class="kw-ork">işlem</code><span class="arrow">→</span><code class="kw-js">function</code></div>
+                    <div class="keyword-row"><code class="kw-ork">dön</code><span class="arrow">→</span><code class="kw-js">return</code></div>
+                    <div class="keyword-row"><code class="kw-ork">asenkron</code><span class="arrow">→</span><code class="kw-js">async</code></div>
+                    <div class="keyword-row"><code class="kw-ork">bekle</code><span class="arrow">→</span><code class="kw-js">await</code></div>
+                </div>
+                <div class="keyword-group">
+                    <h4>Kontrol Akışı</h4>
+                    <div class="keyword-row"><code class="kw-ork">eğer</code><span class="arrow">→</span><code class="kw-js">if</code></div>
+                    <div class="keyword-row"><code class="kw-ork">yoksa</code><span class="arrow">→</span><code class="kw-js">else</code></div>
+                    <div class="keyword-row"><code class="kw-ork">döngü</code><span class="arrow">→</span><code class="kw-js">for</code></div>
+                    <div class="keyword-row"><code class="kw-ork">iken</code><span class="arrow">→</span><code class="kw-js">while</code></div>
+                </div>
+                <div class="keyword-group">
+                    <h4>Sınıflar</h4>
+                    <div class="keyword-row"><code class="kw-ork">sınıf</code><span class="arrow">→</span><code class="kw-js">class</code></div>
+                    <div class="keyword-row"><code class="kw-ork">uzatır</code><span class="arrow">→</span><code class="kw-js">extends</code></div>
+                    <div class="keyword-row"><code class="kw-ork">yapıcı</code><span class="arrow">→</span><code class="kw-js">constructor</code></div>
+                    <div class="keyword-row"><code class="kw-ork">yeni</code><span class="arrow">→</span><code class="kw-js">new</code></div>
+                </div>
+                <div class="keyword-group">
+                    <h4>Modüller</h4>
+                    <div class="keyword-row"><code class="kw-ork">içe_aktar</code><span class="arrow">→</span><code class="kw-js">import</code></div>
+                    <div class="keyword-row"><code class="kw-ork">dışa_aktar</code><span class="arrow">→</span><code class="kw-js">export</code></div>
+                    <div class="keyword-row"><code class="kw-ork">kimden</code><span class="arrow">→</span><code class="kw-js">from</code></div>
+                </div>
+                <div class="keyword-group">
+                    <h4>Tipler</h4>
+                    <div class="keyword-row"><code class="kw-ork">Metin</code><span class="arrow">→</span><code class="kw-js">string</code></div>
+                    <div class="keyword-row"><code class="kw-ork">Sayı</code><span class="arrow">→</span><code class="kw-js">number</code></div>
+                    <div class="keyword-row"><code class="kw-ork">DoğruYanlış</code><span class="arrow">→</span><code class="kw-js">boolean</code></div>
+                    <div class="keyword-row"><code class="kw-ork">Boş</code><span class="arrow">→</span><code class="kw-js">void</code></div>
+                </div>
+            </div>
+            <p class="keywords-more"><a href="dokumantasyon.html">Tüm anahtar kelimeler için dokümantasyona bakın →</a></p>
+        </div>
+    </section>
+
+    <!-- PIPELINE -->
+    <section class="pipeline">
+        <div class="container">
+            <div class="section-header">
+                <h2>Derleyici <span class="gradient-text">Mimarisi</span></h2>
+                <p>.ork dosyalarınız güvenilir bir pipeline ile derlenir</p>
+            </div>
+            <div class="pipeline-steps">
+                <div class="pipeline-step">
+                    <div class="step-num">1</div>
+                    <h4>Lexer</h4>
+                    <p>Kaynak kodu token'lara ayırır</p>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-step">
+                    <div class="step-num">2</div>
+                    <h4>Parser</h4>
+                    <p>AST (Sözdizimi Ağacı) üretir</p>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-step">
+                    <div class="step-num">3</div>
+                    <h4>Analyzer</h4>
+                    <p>Tip kontrolü & doğrulama</p>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-step">
+                    <div class="step-num">4</div>
+                    <h4>Generator</h4>
+                    <p>TypeScript/JS çıktısı üretir</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <h2>Hemen <span class="gradient-text">başlayın</span>.</h2>
+            <p>OrkhonJS ile Türkçe kod yazmaya bugün başlayın.</p>
+            <div class="cta-actions">
+                <a href="dokumantasyon.html" class="btn btn-primary">Dokümantasyon →</a>
+                <a href="https://github.com/emircesur/orkhonjs" class="btn btn-secondary" target="_blank">GitHub'da İncele</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo"><span class="logo-icon">𐰆</span> OrkhonJS</div>
+                    <p>Türkçe sözdizimli programlama dili.<br>Göktürk yazıtlarından ilham alarak.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Dökümanlar</h4>
+                    <a href="dokumantasyon.html">Başlangıç</a>
+                    <a href="dokumantasyon.html#referans">Dil Referansı</a>
+                    <a href="ornekler.html">Örnekler</a>
+                    <a href="oyun-alani.html">Oyun Alanı</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Eklentiler</h4>
+                    <a href="eklentiler.html">VS Code</a>
+                    <a href="eklentiler.html">JetBrains</a>
+                    <a href="eklentiler.html">Vim/Neovim</a>
+                    <a href="eklentiler.html">DevTools</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Topluluk</h4>
+                    <a href="https://github.com/emircesur/orkhonjs" target="_blank">GitHub</a>
+                    <a href="https://github.com/emircesur/orkhonjs/issues" target="_blank">Sorunlar</a>
+                    <a href="https://github.com/emircesur/orkhonjs/pulls" target="_blank">Katkıda Bulun</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>MIT Lisansı ile açık kaynak. © 2026 OrkhonJS</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

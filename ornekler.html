@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Örnekler — OrkhonJS</title>
+    <meta name="description" content="OrkhonJS ile yazılmış kod örnekleri: değişkenler, işlemler, sınıflar, O-JSX, API, hata yönetimi ve daha fazlası.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- NAV -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo"><span class="logo-icon">𐰆</span> OrkhonJS</a>
+            <div class="nav-links">
+                <a href="dokumantasyon.html">Dokümantasyon</a>
+                <a href="ornekler.html" style="color:var(--accent-2)">Örnekler</a>
+                <a href="eklentiler.html">Eklentiler</a>
+                <a href="oyun-alani.html">Oyun Alanı</a>
+                <a href="https://github.com/emircesur/orkhonjs" target="_blank" class="nav-github">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+            </div>
+            <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menü">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- EXAMPLES -->
+    <section class="examples-page">
+        <div class="container">
+            <div class="section-header">
+                <h2>Kod <span class="gradient-text">Örnekleri</span></h2>
+                <p>OrkhonJS ile neler yapabileceğinizi keşfedin</p>
+            </div>
+
+            <div class="examples-grid">
+                <!-- 1: Merhaba Dünya -->
+                <div class="example-card">
+                    <div class="example-card-header">
+                        <h3>Merhaba Dünya</h3>
+                        <p>En basit OrkhonJS programı</p>
+                    </div>
+                    <pre><code><span class="comment">// Merhaba Dünya!</span>
+Konsol.yaz(<span class="str">"Merhaba, OrkhonJS!"</span>)
+
+<span class="kw">tanım</span> isim: Metin = <span class="str">"Dünya"</span>
+<span class="kw">sabit</span> mesaj: Metin = `Merhaba, ${isim}!`
+
+<span class="kw">işlem</span> <span class="fn">selamla</span>(kime: Metin): Metin {
+    <span class="kw">dön</span> `Selam, ${kime}!`
+}
+
+Konsol.yaz(selamla(<span class="str">"OrkhonJS"</span>))</code></pre>
+                </div>
+
+                <!-- 2: Tip & Değişkenler -->
+                <div class="example-card">
+                    <div class="example-card-header">
+                        <h3>Tipler & Değişkenler</h3>
+                        <p>Statik tipli değişken tanımlama</p>
+                    </div>
+                    <pre><code><span class="kw">tanım</span> isim: Metin = <span class="str">"Ahmet"</span>
+<span class="kw">sabit</span> yaş: Sayı = <span class="num">25</span>
+<span class="kw">tanım</span> aktif: DoğruYanlış = <span class="kw">doğru</span>
+<span class="kw">tanım</span> liste: Sayı[] = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>]
+
+<span class="comment">// Tip çıkarımı — tipi belirtmeye gerek yok</span>
+<span class="kw">tanım</span> otomatik = <span class="str">"tip çıkarılır"</span>
+<span class="kw">sabit</span> pi = <span class="num">3.14159</span></code></pre>
+                </div>
+
+                <!-- 3: İşlemler -->
+                <div class="example-card">
+                    <div class="example-card-header">
+                        <h3>İşlemler (Fonksiyonlar)</h3>
+                        <p>Klasik, ok ve asenkron işlemler</p>
+                    </div>
+                    <pre><code><span class="kw">işlem</span> <span class="fn">topla</span>(a: Sayı, b: Sayı): Sayı {
+    <span class="kw">dön</span> a + b
+}
+
+<span class="comment">// Ok işlemi</span>
+<span class="kw">sabit</span> çarp = (a: Sayı, b: Sayı): Sayı =&gt; a * b
+
+<span class="comment">// Asenkron işlem</span>
+<span class="kw">asenkron</span> <span class="kw">işlem</span> <span class="fn">veriGetir</span>(url: Metin): Söz&lt;Hiç&gt; {
+    <span class="kw">tanım</span> yanıt = <span class="kw">bekle</span> ağ.getir(url)
+    <span class="kw">dön</span> <span class="kw">bekle</span> yanıt.json()
+}</code></pre>
+                </div>
+
+                <!-- 4: Sınıflar & Kalıtım -->
+                <div class="example-card">
+                    <div class="example-card-header">
+                        <h3>Sınıflar & Kalıtım</h3>
+                        <p>Nesne yönelimli programlama</p>
+                    </div>
+                    <pre><code><span class="kw">sınıf</span> <span class="fn">Hayvan</span> {
+    isim: Metin
+    yaş: Sayı
+
+    <span class="kw">yapıcı</span>(isim: Metin, yaş: Sayı) {
+        <span class="kw">bu</span>.isim = isim
+        <span class="kw">bu</span>.yaş = yaş
+    }
+
+    <span class="kw">işlem</span> <span class="fn">sesCıkar</span>(): Metin {
+        <span class="kw">dön</span> <span class="str">"..."</span>
+    }
+}
+
+<span class="kw">sınıf</span> <span class="fn">Kedi</span> <span class="kw">uzatır</span> Hayvan {
+    <span class="kw">işlem</span> <span class="fn">sesCıkar</span>(): Metin {
+        <span class="kw">dön</span> <span class="str">"Miyav!"</span>
+    }
+}
+
+<span class="kw">tanım</span> kedi = <span class="kw">yeni</span> Kedi(<span class="str">"Tekir"</span>, <span class="num">3</span>)
+Konsol.yaz(kedi.sesCıkar())</code></pre>
+                </div>
+
+                <!-- 5: Arayüzler & Jenerikler -->
+                <div class="example-card">
+                    <div class="example-card-header">
+                        <h3>Arayüzler & Jenerikler</h3>
+                        <p>Tip sözleşmeleri ve jenerik tipler</p>
+                    </div>
+                    <pre><code><span class="kw">arayüz</span> <span class="fn">Kullanıcı</span> {
+    id: Sayı
+    isim: Metin
+    eposta: Metin
+    aktif: DoğruYanlış
+}
+
+<span class="kw">arayüz</span> <span class="fn">Depo</span>&lt;T&gt; {
+    getir(id: Sayı): Söz&lt;T&gt;
+    kaydet(veri: T): Söz&lt;Boş&gt;
+    sil(id: Sayı): Söz&lt;DoğruYanlış&gt;
+}
+
+<span class="comment">// Jenerik işlem</span>
+<span class="kw">işlem</span> <span class="fn">ilkBul</span>&lt;T&gt;(liste: T[], koşul: (e: T) =&gt; DoğruYanlış): T {
+    <span class="kw">dön</span> liste.süz(koşul)[<span class="num">0</span>]
+}</code></pre>
+                </div>
+
+                <!-- 6: O-JSX React -->
+                <div class="example-card">
+                    <div class="example-card-header">
+                        <h3>O-JSX (React)</h3>
+                        <p>React bileşenini Türkçe yazın</p>
+                    </div>
+                    <pre><code><span class="kw">içe_aktar</span> { useState } <span class="kw">kimden</span> <span class="str">"react"</span>
+
+<span class="kw">dışa_aktar</span> <span class="kw">işlem</span> <span class="fn">Sayaç</span>(): JSX.Eleman {
+    <span class="kw">tanım</span> [değer, değerAyarla] = useState(<span class="num">0</span>)
+
+    <span class="kw">dön</span> (
+        &lt;<span class="tag">div</span> className=<span class="str">"sayaç"</span>&gt;
+            &lt;<span class="tag">h1</span>&gt;Değer: {değer}&lt;/<span class="tag">h1</span>&gt;
+            &lt;<span class="tag">buton</span> tıklama={() =&gt; değerAyarla(değer + <span class="num">1</span>)}&gt;
+                Artır ↑
+            &lt;/<span class="tag">buton</span>&gt;
+            &lt;<span class="tag">buton</span> tıklama={() =&gt; değerAyarla(değer - <span class="num">1</span>)}&gt;
+                Azalt ↓
+            &lt;/<span class="tag">buton</span>&gt;
+        &lt;/<span class="tag">div</span>&gt;
+    )
+}</code></pre>
+                </div>
+
+                <!-- 7: Hata Yönetimi -->
+                <div class="example-card">
+                    <div class="example-card-header">
+                        <h3>Hata Yönetimi</h3>
+                        <p>try/catch/finally Türkçe karşılıkları</p>
+                    </div>
+                    <pre><code><span class="kw">dene</span> {
+    <span class="kw">tanım</span> veri = <span class="kw">bekle</span> veriGetir(
+        <span class="str">"https://api.örnek.com/kullanıcılar"</span>
+    )
+    Konsol.yaz(veri)
+} <span class="kw">yakala</span> (hata) {
+    Konsol.hata(<span class="str">"Veri alınamadı:"</span>, hata)
+} <span class="kw">sonunda</span> {
+    Konsol.bilgi(<span class="str">"İstek tamamlandı"</span>)
+}
+
+<span class="comment">// Hata fırlatma</span>
+<span class="kw">işlem</span> <span class="fn">doğrula</span>(yaş: Sayı): Boş {
+    <span class="kw">eğer</span> (yaş &lt; <span class="num">0</span>) {
+        <span class="kw">fırlat</span> <span class="kw">yeni</span> Hata(<span class="str">"Geçersiz yaş"</span>)
+    }
+}</code></pre>
+                </div>
+
+                <!-- 8: Dizi İşlemleri -->
+                <div class="example-card">
+                    <div class="example-card-header">
+                        <h3>Döngüler & Dizi İşlemleri</h3>
+                        <p>Türkçe haritala, süz, indirge</p>
+                    </div>
+                    <pre><code><span class="kw">sabit</span> sayılar: Sayı[] = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>, <span class="num">6</span>, <span class="num">7</span>, <span class="num">8</span>, <span class="num">9</span>, <span class="num">10</span>]
+
+<span class="comment">// Haritala (map)</span>
+<span class="kw">sabit</span> kareler = sayılar.haritala((s) =&gt; s * s)
+
+<span class="comment">// Süz (filter)</span>
+<span class="kw">sabit</span> çiftler = sayılar.süz((s) =&gt; s % <span class="num">2</span> == <span class="num">0</span>)
+
+<span class="comment">// İndirge (reduce)</span>
+<span class="kw">sabit</span> toplam = sayılar.indirge((t, s) =&gt; t + s, <span class="num">0</span>)
+
+<span class="comment">// For...of</span>
+<span class="kw">döngü</span> (<span class="kw">tanım</span> sayı <span class="kw">nın</span> sayılar) {
+    Konsol.yaz(sayı)
+}</code></pre>
+                </div>
+
+                <!-- 9: REST API -->
+                <div class="example-card">
+                    <div class="example-card-header">
+                        <h3>REST API Sunucusu</h3>
+                        <p>Türkçe komutlarla API oluşturma</p>
+                    </div>
+                    <pre><code><span class="kw">içe_aktar</span> { sunucu } <span class="kw">kimden</span> <span class="str">"orkhonjs/bulut"</span>
+
+<span class="kw">sabit</span> uygulama = sunucu.oluştur()
+
+uygulama.al(<span class="str">"/kullanıcılar"</span>, <span class="kw">asenkron</span> (istek, yanıt) =&gt; {
+    <span class="kw">tanım</span> kullanıcılar = <span class="kw">bekle</span> Veritabanı
+        .sorgu(<span class="str">"kullanıcılar"</span>)
+        .hepsi()
+    yanıt.json(kullanıcılar)
+})
+
+uygulama.gönder(<span class="str">"/kullanıcılar"</span>, <span class="kw">asenkron</span> (istek, yanıt) =&gt; {
+    <span class="kw">tanım</span> yeni = <span class="kw">bekle</span> Veritabanı
+        .sorgu(<span class="str">"kullanıcılar"</span>)
+        .ekle(istek.gövde)
+    yanıt.json(yeni)
+})
+
+uygulama.dinle(<span class="num">3000</span>)</code></pre>
+                </div>
+
+                <!-- 10: Standart Kütüphane -->
+                <div class="example-card">
+                    <div class="example-card-header">
+                        <h3>Standart Kütüphane</h3>
+                        <p>Türkçe Konsol, Matematik, JSON</p>
+                    </div>
+                    <pre><code><span class="comment">// Konsol</span>
+Konsol.yaz(<span class="str">"Normal mesaj"</span>)
+Konsol.uyarı(<span class="str">"Uyarı!"</span>)
+Konsol.hata(<span class="str">"Hata oluştu"</span>)
+Konsol.tablo([{a: <span class="num">1</span>}, {a: <span class="num">2</span>}])
+
+<span class="comment">// Matematik</span>
+<span class="kw">sabit</span> yuvarlak = Matematik.yuvarla(<span class="num">3.7</span>)  <span class="comment">// 4</span>
+<span class="kw">sabit</span> taban = Matematik.taban(<span class="num">3.7</span>)      <span class="comment">// 3</span>
+<span class="kw">sabit</span> rastgele = Matematik.rastgele()
+
+<span class="comment">// JSON</span>
+<span class="kw">sabit</span> nesne = JSON.ayrıştır(<span class="str">'{"ad":"Ali"}'</span>)
+<span class="kw">sabit</span> metin = JSON.metneÇevir(nesne)
+
+<span class="comment">// Zamanlayıcı</span>
+zamanlayıcıKur(() =&gt; Konsol.yaz(<span class="str">"Bip!"</span>), <span class="num">1000</span>)</code></pre>
+                </div>
+
+                <!-- 11: Modüller -->
+                <div class="example-card">
+                    <div class="example-card-header">
+                        <h3>Modül Sistemi</h3>
+                        <p>İçe aktarma ve dışa aktarma</p>
+                    </div>
+                    <pre><code><span class="comment">// matematik.ork</span>
+<span class="kw">dışa_aktar</span> <span class="kw">işlem</span> <span class="fn">topla</span>(a: Sayı, b: Sayı): Sayı {
+    <span class="kw">dön</span> a + b
+}
+
+<span class="kw">dışa_aktar</span> <span class="kw">işlem</span> <span class="fn">çıkar</span>(a: Sayı, b: Sayı): Sayı {
+    <span class="kw">dön</span> a - b
+}
+
+<span class="kw">dışa_aktar</span> <span class="kw">varsayılan</span> <span class="kw">sınıf</span> <span class="fn">Hesaplayıcı</span> {
+    <span class="kw">işlem</span> <span class="fn">hesapla</span>(ifade: Metin): Sayı { ... }
+}
+
+<span class="comment">// uygulama.ork</span>
+<span class="kw">içe_aktar</span> Hesaplayıcı, { topla, çıkar } <span class="kw">kimden</span> <span class="str">"./matematik"</span>
+
+Konsol.yaz(topla(<span class="num">5</span>, <span class="num">3</span>))   <span class="comment">// 8</span></code></pre>
+                </div>
+
+                <!-- 12: Dağıtım -->
+                <div class="example-card">
+                    <div class="example-card-header">
+                        <h3>Dağıtım (Deploy)</h3>
+                        <p>Vercel/Netlify'a Türkçe komutlarla</p>
+                    </div>
+                    <pre><code><span class="comment"># Yapılandırma oluştur</span>
+npx ork-dağıt yapılandır
+
+<span class="comment"># Derle</span>
+npx ork-dağıt derle
+
+<span class="comment"># Vercel'e dağıt</span>
+npx ork-dağıt dağıt --hedef vercel --token TOKEN
+
+<span class="comment"># Netlify'a dağıt</span>
+npx ork-dağıt dağıt --hedef netlify --token TOKEN
+
+<span class="comment"># Yerel önizleme</span>
+npx ork-dağıt önizle</code></pre>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin-top:48px;">
+                <a href="oyun-alani.html" class="btn btn-primary">Oyun Alanında Dene →</a>
+                <a href="dokumantasyon.html" class="btn btn-secondary" style="margin-left:12px;">Dokümantasyon</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo"><span class="logo-icon">𐰆</span> OrkhonJS</div>
+                    <p>Türkçe sözdizimli programlama dili.<br>Göktürk yazıtlarından ilham alarak.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Dökümanlar</h4>
+                    <a href="dokumantasyon.html">Başlangıç</a>
+                    <a href="dokumantasyon.html#referans">Dil Referansı</a>
+                    <a href="ornekler.html">Örnekler</a>
+                    <a href="oyun-alani.html">Oyun Alanı</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Eklentiler</h4>
+                    <a href="eklentiler.html">VS Code</a>
+                    <a href="eklentiler.html">JetBrains</a>
+                    <a href="eklentiler.html">Vim/Neovim</a>
+                    <a href="eklentiler.html">DevTools</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Topluluk</h4>
+                    <a href="https://github.com/emircesur/orkhonjs" target="_blank">GitHub</a>
+                    <a href="https://github.com/emircesur/orkhonjs/issues" target="_blank">Sorunlar</a>
+                    <a href="https://github.com/emircesur/orkhonjs/pulls" target="_blank">Katkıda Bulun</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>MIT Lisansı ile açık kaynak. © 2026 OrkhonJS</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
