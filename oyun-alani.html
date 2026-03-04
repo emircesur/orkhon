@@ -157,6 +157,10 @@ Konsol.yaz(selamla("OrkhonJS"))
         code = code.replaceAll('.bul(', '.find(');
         code = code.replaceAll('.içerir(', '.includes(');
 
+        // Fix class methods: 'function' keyword is invalid inside class bodies
+        // Remove 'function' when it appears indented (as a method declaration)
+        code = code.replace(/^(\s+)function\s+(?=\w+\s*\()/gm, '$1');
+
         return code;
     }
 
